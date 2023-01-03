@@ -4,6 +4,7 @@ import styles from './CandidateList.module.css';
 import { Container, Row, Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { useState } from 'react';
 import Candidate from '../Candidate/Candidate';
+import CandidateDetails from '../CandidateDetails/CandidateDetails';
 
 const candidates = [
   {
@@ -12,7 +13,9 @@ const candidates = [
     surname: 'Kowalski',
     email: 'Kacperkowalski1@wp.pl',
     phoneNumber: '123456789',
-    stage: 'New'
+    stage: 'New',
+    HRInterviewDate: "2023-01-05",
+    TechInterviewDate: ""
   },
   {
     id: 1,
@@ -20,7 +23,9 @@ const candidates = [
     surname: 'Anonim',
     email: 'Galanonim2@wp.pl',
     phoneNumber: '234567890',
-    stage: 'HR interview'
+    stage: 'HR interview',
+    HRInterviewDate: "2023-01-05",
+    TechInterviewDate: "2023-01-10"
   },
   {
     id: 2,
@@ -28,7 +33,9 @@ const candidates = [
     surname: 'Skłodowska',
     email: 'MariaSkłodowska3@wp.pl',
     phoneNumber: '345678901',
-    stage: 'Dropped out'
+    stage: 'Dropped out',
+    HRInterviewDate: "",
+    TechInterviewDate: ""
   },
   {
     id: 3,
@@ -36,7 +43,9 @@ const candidates = [
     surname: 'Slayer',
     email: 'DoomSlayer4@wp.pl',
     phoneNumber: '456789012',
-    stage: 'Tech interview'
+    stage: 'Tech interview',
+    HRInterviewDate: "2023-01-10",
+    TechInterviewDate: "2023-01-12"
   },
   {
     id: 4,
@@ -44,7 +53,9 @@ const candidates = [
     surname: 'Gundyr',
     email: 'IudexGundyr5@wp.pl',
     phoneNumber: '567890123',
-    stage: 'Dropped out'
+    stage: 'Dropped out',
+    HRInterviewDate: "2022-12-13",
+    TechInterviewDate: ""
   },
   {
     id: 5,
@@ -52,7 +63,9 @@ const candidates = [
     surname: 'Baggins',
     email: 'BilboBaggins6@wp.pl',
     phoneNumber: '678901234',
-    stage: 'New'
+    stage: 'New',
+    HRInterviewDate: "2023-01-07",
+    TechInterviewDate: ""
   },
   {
     id: 6,
@@ -60,7 +73,9 @@ const candidates = [
     surname: 'Potter',
     email: 'HarryPotter7@wp.pl',
     phoneNumber: '789012345',
-    stage: 'HR interview'
+    stage: 'HR interview',
+    HRInterviewDate: "2023-01-07",
+    TechInterviewDate: "2023-01-20"
   },
   {
     id: 7,
@@ -68,7 +83,9 @@ const candidates = [
     surname: 'Hyakuya',
     email: 'MikaelaHyakuya8@wp.pl',
     phoneNumber: '890123456',
-    stage: 'Hired'
+    stage: 'Hired',
+    HRInterviewDate: "2023-01-01",
+    TechInterviewDate: "2023-01-02"
   },
   {
     id: 8,
@@ -76,7 +93,9 @@ const candidates = [
     surname: 'of Rivia',
     email: 'GeraltOfRivia9@wp.pl',
     phoneNumber: '012345678',
-    stage: 'Tech interview'
+    stage: 'Tech interview',
+    HRInterviewDate: "2023-02-10",
+    TechInterviewDate: "2023-02-11"
   },
   {
     id: 9,
@@ -84,7 +103,9 @@ const candidates = [
     surname: 'Bronsson',
     email: 'EragonBronsson10@wp.pl',
     phoneNumber: '123456098',
-    stage: 'HR interview'
+    stage: 'HR interview',
+    HRInterviewDate: "2023-01-08",
+    TechInterviewDate: ""
   },
   {
     id: 10,
@@ -92,15 +113,19 @@ const candidates = [
     surname: 'the Hedgehog',
     email: 'SonicTheHedgehog11@wp.pl',
     phoneNumber: '123098345',
-    stage: 'New'
+    stage: 'New',
+    HRInterviewDate: "",
+    TechInterviewDate: ""
   },
   {
     id: 11,
     name: 'James',
     surname: 'Bond',
-    email: 'JamesBond12@wp.pl',
-    phoneNumber: '997997997',
-    stage: 'Tech interview'
+    email: 'JamesBond007@wp.pl',
+    phoneNumber: '007007007',
+    stage: 'Tech interview',
+    HRInterviewDate: "2023-10-07",
+    TechInterviewDate: "2023-10-08"
   },
   {
     id: 12,
@@ -108,7 +133,9 @@ const candidates = [
     surname: 'Voldemort',
     email: 'LordVoldemort13@wp.pl',
     phoneNumber: '098234853',
-    stage: 'Dropped out'
+    stage: 'Dropped out',
+    HRInterviewDate: "",
+    TechInterviewDate: ""
   },
   {
     id: 13,
@@ -116,7 +143,9 @@ const candidates = [
     surname: 'Fujimiya',
     email: 'AmaneFujimij14a@wp.pl',
     phoneNumber: '648420864',
-    stage: 'New'
+    stage: 'New',
+    HRInterviewDate: "2023-01-07",
+    TechInterviewDate: ""
   },
   {
     id: 14,
@@ -124,35 +153,143 @@ const candidates = [
     surname: 'Shinna',
     email: 'MahiruShinna15',
     phoneNumber: '098765432',
-    stage: 'New'
+    stage: 'New',
+    HRInterviewDate: "2023-01-07",
+    TechInterviewDate: ""
   }
 ]
 
-const CandidateList = () => {
+const pageSize=10;
 
-  const [selectedId, setSelectedId] = useState(-1);
+class CandidateList extends React.Component{
+  constructor(props){
+    super(props);
 
-  return (
-    <Container>
-      <Row>
-        <Col sm={3} lg={6}>
-          <ListGroup as="ul" style={{width:"fit-content"}}>
-            {candidates.map(e => <ListGroupItem
-              key={e.id}
-              as="li"
-              action
-              active={selectedId === e.id}
-              onClick={() => setSelectedId(e.id)}>
-              <Candidate name={e.name} surname={e.surname} stage={e.stage}></Candidate>
-            </ListGroupItem>)}
-          </ListGroup>
-        </Col>
-        <Col>
-        </Col>
-      </Row>
-    </Container>
-  )
+    let candidatesPage=[];
 
+    for(let i=0;i<pageSize;i++){
+      candidatesPage.push(candidates[i]);
+    }
+
+    this.state={
+      selectedId:-1,
+      candidatesBeforePaging:candidates,
+      candidates:candidatesPage,
+      pageNumber:1,
+      lastPageNumber:Math.ceil(candidates.length/pageSize),
+      totalCount:candidates.length
+    }
+
+    this.toggleSelectedId=this.toggleSelectedId.bind(this);
+    this.filterCandidates=this.filterCandidates.bind(this);
+    this.loadPreviousPage=this.loadPreviousPage.bind(this);
+    this.loadNextPage=this.loadNextPage.bind(this);
+  }
+
+  toggleSelectedId(id){
+    if(id===this.state.selectedId){
+      this.setState({
+        selectedId:-1
+      })
+    }
+    else{
+      this.setState({
+        selectedId:id
+      })
+    }
+  }
+  filterCandidates(e){
+    const filteredCandidates=candidates.filter(f=>f.surname.startsWith(e.target.value));
+
+    this.setState({
+      candidates:filteredCandidates,
+      candidatesBeforePaging:filteredCandidates,
+      totalCount:filteredCandidates.length,
+      pageNumber:filteredCandidates.length/pageSize>0?1:0,
+      lastPageNumber:Math.ceil(filteredCandidates.length/pageSize)
+    })
+  }
+  loadPreviousPage(){
+    let candidates=[];
+
+    for(let i=(this.state.pageNumber-2)*pageSize;i<(this.state.pageNumber-1)*pageSize;i++){
+      candidates.push(this.state.candidatesBeforePaging[i]);
+    }
+
+    this.setState((state)=>{
+      return{
+        pageNumber:state.pageNumber-1,
+        candidates:candidates
+      }
+    })
+  }
+  loadNextPage(){
+    let candidates=[];
+
+    const lastItem=(this.state.pageNumber+1)*pageSize>this.state.totalCount?this.state.totalCount:(this.state.pageNumber+1)*pageSize;
+
+    for(let i=this.state.pageNumber*pageSize;i<lastItem;i++){
+      candidates.push(this.state.candidatesBeforePaging[i]);
+    }
+
+    this.setState((state)=>{
+      return{
+        pageNumber:state.pageNumber+1,
+        candidates:candidates
+      }
+    })
+  }
+
+
+  render(){
+    const candidate=candidates.find(e=>e.id===this.state.selectedId);
+
+    return (
+      <Container>
+        <Row className="mb-3">
+          <input type='text' placeholder='Find a candidate by surname' onChange={e=>this.filterCandidates(e)}></input>
+        </Row>
+        <Row>
+          <Col xs={12} sm={12} md={12} lg={12}>
+            <ListGroup as="ul">
+              {this.state.candidates.map(e => <div key={e.id}>
+                <ListGroupItem
+                as="li"
+                action
+                active={this.state.selectedId === e.id}
+                onClick={() => {this.toggleSelectedId(e.id)}}
+                style={{cursor:"pointer"}}>
+                <Candidate name={e.name} surname={e.surname} stage={e.stage}></Candidate>
+                </ListGroupItem>
+                {this.state.selectedId===e.id?
+                <CandidateDetails
+                  name={e.name}
+                  surname={e.surname}
+                  email={e.email}
+                  phoneNumber={e.phoneNumber}
+                  stage={e.stage}
+                  HRInterviewDate={e.HRInterviewDate}
+                  TechInterviewDate={e.TechInterviewDate}>
+                </CandidateDetails>
+              :<span></span>}
+                </div>)}
+            </ListGroup>
+          </Col>
+        </Row>
+        <Row className="text-center">
+            <Col>
+              {this.state.pageNumber<=1?
+              <Button className="rounded" variant="info" disabled>&#10094;&#9866;</Button>
+              :<Button className="rounded" variant="info" onClick={this.loadPreviousPage}>&#10094;&#9866;</Button>}
+              <span>Page {this.state.pageNumber} out of {this.state.lastPageNumber}</span>
+              {this.state.pageNumber===this.state.lastPageNumber?
+              <Button className="rounded" variant="info" disabled>&#9866;&#10095;</Button>
+              :<Button className="rounded" variant="info" onClick={this.loadNextPage}>&#9866;&#10095;</Button>}
+            </Col>
+          </Row>
+      </Container>
+    )
+  }
 };
 
 CandidateList.propTypes = {};
