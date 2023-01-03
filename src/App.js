@@ -18,6 +18,7 @@ import CreateRecruitment from './components/Recruitments/CreateRecruitment/Creat
 import EditRecruitment from './components/Recruitments/EditRecruitment/EditRecruitment';
 import CreateCandidate from './components/Candidates/CreateCandidate/CreateCandidate';
 import CandidateList from './components/Candidates/CandidateList/CandidateList';
+import InterviewList from './components/Interviews/InterviewList/InterviewList';
 
 function App() {
   const [headerExpanded, setHeaderExpanded] = useState(false);
@@ -49,6 +50,9 @@ function App() {
               </li>
               <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
                 <Link to={"/Recruitments"} className="nav-link">Recruitments</Link>
+              </li>
+              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
+                <Link to={"/Interviews"} className="nav-link">Interviews</Link>
               </li>
             </ul>
           </Navbar.Collapse>
@@ -95,6 +99,8 @@ function App() {
 
           <Route exact path={"/Candidate/Create"} element={<CreateCandidate/>}/>
           <Route exact path={"/Candidates"} element={<CandidateList/>}/>
+
+          <Route exact path={"/Interviews"} element={<InterviewList/>}/>
         </Routes>
       </Container>
     </div>
