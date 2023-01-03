@@ -4,6 +4,7 @@ import styles from './CandidateList.module.css';
 import { Container, Row, Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { useState } from 'react';
 import Candidate from '../Candidate/Candidate';
+import CandidateDetails from '../CandidateDetails/CandidateDetails';
 
 const candidates = [
   {
@@ -131,23 +132,32 @@ const candidates = [
 const CandidateList = () => {
 
   const [selectedId, setSelectedId] = useState(-1);
+  const candidate=candidates.find(e=>e.id===selectedId);
 
   return (
     <Container>
       <Row>
-        <Col sm={3} lg={6}>
-          <ListGroup as="ul" style={{width:"fit-content"}}>
-            {candidates.map(e => <ListGroupItem
-              key={e.id}
+        <Col xs={12} sm={12} md={12} lg={12}>
+          <ListGroup as="ul">
+            {candidates.map(e => <div key={e.id}>
+              <ListGroupItem
               as="li"
               action
               active={selectedId === e.id}
               onClick={() => setSelectedId(e.id)}>
               <Candidate name={e.name} surname={e.surname} stage={e.stage}></Candidate>
-            </ListGroupItem>)}
+              </ListGroupItem>
+              {selectedId===e.id?
+              <CandidateDetails
+                name={e.name}
+                surname={e.surname}
+                email={e.email}
+                phoneNumber={e.phoneNumber}
+                stage={e.stage}>
+              </CandidateDetails>
+            :<span></span>}
+              </div>)}
           </ListGroup>
-        </Col>
-        <Col>
         </Col>
       </Row>
     </Container>
