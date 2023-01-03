@@ -1,0 +1,12 @@
+.PrivacyPolicy {
+    text-align: left;
+}
+.PrivacyPolicy li,p{
+    font-size: 2vw;
+}
+.PrivacyPolicy h1{
+    font-size: 4vw;
+}
+.PrivacyPolicy h2{
+    font-size: 3vw;
+}
