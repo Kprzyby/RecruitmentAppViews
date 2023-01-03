@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './CandidateDetails.module.css';
-import { Card, Tabs, Tab, Container, Row, Col } from 'react-bootstrap'
+import { Card, Tabs, Tab, Container, Row, Col, FormGroup, Form, FormLabel, FormControl } from 'react-bootstrap'
 import CardHeader from 'react-bootstrap/esm/CardHeader';
+import { Select } from '@mui/material';
+import EditCandidate from '../EditCandidate/EditCandidate';
 
 const CandidateDetails = (props) => (
   <Container className="text-center">
@@ -56,8 +58,18 @@ const CandidateDetails = (props) => (
               </Col>
             </Row>
           </Tab>
-          <Tab eventKey="Edit" title="Edit">b</Tab>
-          <Tab eventKey="Manage" title="Manage">c</Tab>
+
+          <Tab eventKey="Edit" title="Edit">
+            <EditCandidate
+            name={props.name}
+            surname={props.surname}
+            email={props.email}
+            phoneNumber={props.phoneNumber}
+            stage={props.stage}></EditCandidate>
+          </Tab>
+          <Tab eventKey="Manage" title="Manage">
+            
+          </Tab>
         </Tabs>
       </Card.Body>
     </Card>
