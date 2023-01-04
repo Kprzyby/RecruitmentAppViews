@@ -5,7 +5,7 @@ import { ListGroup, ListGroupItem, Container, Row, Form} from 'react-bootstrap';
 import Interview from '../Interview/Interview';
 import Select from 'react-select'
 
-const interiviews = [
+const interviews = [
   {
     id:0,
     interviewType:"HR interview",
@@ -41,7 +41,7 @@ class InterviewList extends React.Component {
     super(props);
 
     this.state = {
-      interiviews: interiviews
+      interviews: interviews
     }
 
     this.filterInterviews=this.filterInterviews.bind(this);
@@ -51,14 +51,14 @@ class InterviewList extends React.Component {
     let filteredInterviews;
 
     if(!e.target.value){
-      filteredInterviews=interiviews;
+      filteredInterviews=interviews;
     }
     else{
-      filteredInterviews=interiviews.filter(f=>f.interviewType===e.target.value);
+      filteredInterviews=interviews.filter(f=>f.interviewType===e.target.value);
     }
 
     this.setState({
-      interiviews:filteredInterviews
+      interviews:filteredInterviews
     });
   }
 
@@ -68,15 +68,14 @@ class InterviewList extends React.Component {
       <Container>
         <Row className="mb-3">
           <label htmlFor='filter'>Filter by type</label>
-          <Form.Select id='filter' onChange={this.filterInterviews}>
-            <option disabled selected>Choose the interview type</option>
+          <Form.Select id='filter' onChange={e=>this.filterInterviews(e)}>
             <option value="">Show both</option>
             <option value="HR interview">HR interview</option>
             <option value="Tech interview">Tech interview</option>
           </Form.Select>
         </Row>
         <ListGroup as="ul">
-          {this.state.interiviews.map(e => <ListGroupItem
+          {this.state.interviews.map(e => <ListGroupItem
             as="li"
             key={e.id}>
               <Interview

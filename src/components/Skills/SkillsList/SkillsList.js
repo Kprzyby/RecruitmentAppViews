@@ -4,6 +4,7 @@ import styles from './SkillsList.module.css';
 import {Table, Button} from "react-bootstrap"
 import {MDBIcon} from 'mdb-react-ui-kit'
 import CreateSkill from '../CreateSkill/CreateSkill';
+import DeleteModal from '../../DeleteModal/DeleteModal';
 
 class SkillsList extends React.Component{
   constructor(props){
@@ -102,7 +103,7 @@ editItem(event) {
       <div>
         <CreateSkill></CreateSkill>
         <div className="d-flex justify-content-center align-items-center" style={{clear:"both"}}>
-      <Table striped bordered hover style={{width:"70vw"}} className="text-center">
+      <Table striped bordered hover className="text-center">
         <thead>
           <tr>
             <th>#</th>
@@ -120,12 +121,10 @@ editItem(event) {
                 :<span>{e.name}</span>}  
               </td>
               <td style={{width:"40vw", verticalAlign:"middle"}}>
-                <Button className="rounded" variant='success' size="sm" onClick={f=>this.setState({idToEdit:e.id})}>
+                <Button className="rounded" variant='success' size="md" onClick={f=>this.setState({idToEdit:e.id})}>
                   <MDBIcon far icon="edit" size="lg"/>
                 </Button>
-                <Button className="rounded" variant='danger' size="sm">
-                  <MDBIcon fas icon="trash" size="lg"/>
-                </Button>
+                <DeleteModal modalMessage="Are you sure you want to delete this skill?"></DeleteModal>
               </td>
             </tr>
             )}
