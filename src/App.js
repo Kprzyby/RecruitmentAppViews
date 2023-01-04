@@ -19,6 +19,7 @@ import EditRecruitment from './components/Recruitments/EditRecruitment/EditRecru
 import CreateCandidate from './components/Candidates/CreateCandidate/CreateCandidate';
 import CandidateList from './components/Candidates/CandidateList/CandidateList';
 import InterviewList from './components/Interviews/InterviewList/InterviewList';
+import UserProfile from './components/UserProfile/UserProfile'
 
 function App() {
   const [headerExpanded, setHeaderExpanded] = useState(false);
@@ -37,22 +38,28 @@ function App() {
           <Navbar.Collapse id='responsive-navbar-nav'>
             <ul className='navbar-nav'>
               <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
+                <Link to={"/Profile"} className="nav-link">Profile</Link>
+              </li>
+              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
                 <Link to={"/SignIn"} className="nav-link">Sign in</Link>
               </li>
               <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
+                <Link to={"/SignUp"} className="nav-link">Sign up</Link>
+              </li>
+              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
                 <Link to={"/Skills"} className="nav-link">Skills</Link>
-              </li>
-              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
-                <Link to={"/ResetPassword"} className="nav-link">Reset password</Link>
-              </li>
-              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
-                <Link to={"/ConfirmAccount"} className="nav-link">Confirm account</Link>
               </li>
               <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
                 <Link to={"/Recruitments"} className="nav-link">Recruitments</Link>
               </li>
               <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
                 <Link to={"/Interviews"} className="nav-link">Interviews</Link>
+              </li>
+              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
+                <Link to={"/ResetPassword"} className="nav-link">Reset password</Link>
+              </li>
+              <li className="nav-item" onClick={e => setHeaderExpanded(false)}>
+                <Link to={"/ConfirmAccount"} className="nav-link">Confirm account</Link>
               </li>
             </ul>
           </Navbar.Collapse>
@@ -101,6 +108,8 @@ function App() {
           <Route exact path={"/Candidates"} element={<CandidateList/>}/>
 
           <Route exact path={"/Interviews"} element={<InterviewList/>}/>
+
+          <Route exact path={"/Profile"} element={<UserProfile/>}/>
         </Routes>
       </Container>
     </div>
