@@ -5,6 +5,7 @@ import { Card, Tabs, Tab, Container, Row, Col, FormGroup, Form, FormLabel, FormC
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Select } from '@mui/material';
 import EditCandidate from '../EditCandidate/EditCandidate';
+import CreateInterviews from '../../Interviews/CreateInterviews/CreateInterviews';
 
 const CandidateDetails = (props) => (
   <Container className="text-center">
@@ -68,7 +69,7 @@ const CandidateDetails = (props) => (
             stage={props.stage}></EditCandidate>
           </Tab>
           <Tab eventKey="Manage" title="Manage">
-            
+            <CreateInterviews></CreateInterviews> 
           </Tab>
         </Tabs>
       </Card.Body>
