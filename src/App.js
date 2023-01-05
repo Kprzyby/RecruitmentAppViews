@@ -19,7 +19,8 @@ import EditRecruitment from './components/Recruitments/EditRecruitment/EditRecru
 import CreateCandidate from './components/Candidates/CreateCandidate/CreateCandidate';
 import CandidateList from './components/Candidates/CandidateList/CandidateList';
 import InterviewList from './components/Interviews/InterviewList/InterviewList';
-import UserProfile from './components/UserProfile/UserProfile'
+import UserProfile from './components/UserProfile/UserProfile';
+import ChangePassword from './components/Auth/ChangePassword/ChangePassword'
 
 function App() {
   const [headerExpanded, setHeaderExpanded] = useState(false);
@@ -92,6 +93,7 @@ function App() {
           <Route exact path={"/RemindPassword"} element={<RemindPassword />} />
           <Route exact path={"/ResetPassword"} element={<NewPassword />} />
           <Route exact path={"/ConfirmAccount"} element={<ConfirmAccount />} />
+          <Route exact path={"/ChangePassword"} element={<ChangePassword/>}/>
 
           <Route exact path={"/Privacy"} element={<PrivacyPolicy />} />
           <Route exact path={"/Terms"} element={<TermsOfUse />} />

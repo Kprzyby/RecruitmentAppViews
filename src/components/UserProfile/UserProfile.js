@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './UserProfile.module.css';
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => (
   <Container>
@@ -27,7 +28,7 @@ const UserProfile = () => (
         </Row>
         <Row className="mt-3">
           <div className="text-center">
-          <Button variant="primary" className="rounded" size="lg">Change password</Button>
+            <Link to={"/ChangePassword"} className="btn btn-primary rounded">Change password</Link>
           </div>
         </Row>
       </Card.Body>
